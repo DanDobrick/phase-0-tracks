@@ -14,6 +14,6 @@ A branch is a copy of the project that you can add or remove features on without
 
 A commit is a like a "save state" it is a change that you have made to a file(s) that you want to save and take note of. This is essential because it makes rolling back to previous versions possible. When making commits, messages should be specific and descriptive about what has been changed since the last commit.
 
-* What is a merge conflict?
+* What is a conflict?
 
 A merge conflict happens when you create a branch, then change a file in that branch while the original copy of that file also gets changed before you merge. The computer doesn't make any assumptions about which changes are valid and asks for user input of some kind.
