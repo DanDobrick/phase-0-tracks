@@ -1,0 +1,24 @@
+.container{
+  height: 600px;
+  width: 800px;
+  margin: auto;
+}
+
+#octopus {
+  display: block;
+  margin: auto;
+  margin-top: 10%;
+}
+
+#hat{
+  position: relative;
+  display: inline-block;
+  left: 34%;
+  top: -350px;
+}
+
+#glasses{
+  position: relative;
+  left: 7%;
+  bottom:299px;
+}
