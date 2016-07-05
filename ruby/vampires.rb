@@ -2,6 +2,7 @@ puts "How many employees are going to be tested?"
 num_employees = gets.chomp.to_i
 
 while num_employees >0
+  # Survey Questions
   puts "What is your name?"
   name = gets.chomp
 
@@ -32,6 +33,18 @@ while num_employees >0
   if ['Drake Cula', 'Tu Fang'].include? name
     result = "Definitely a vampire"
   end
+
+  #Allergy Checker
+  allergy = " "
+  until allergy == "done"
+    puts "What allergies do you have? Type \'done\' If you don't have any more."
+    allergy = gets.chomp.downcase
+    if allergy == "sunshine"
+      result = "Probably a vampire"
+      allergy = "done"
+    end
+  end
+
   puts result
   num_employees -=1
   if num_employees >=1
