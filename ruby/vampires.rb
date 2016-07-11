@@ -34,12 +34,12 @@ while num_employees >0
     result = "Definitely a vampire"
   end
 
-  #Allergy Checker
   allergy = " "
   until allergy == "done"
     puts "What allergies do you have? Type \'done\' If you don't have any more."
     allergy = gets.chomp.downcase
-    if allergy == "sunshine"
+    case allergy
+    when "sunshine"
       result = "Probably a vampire"
       allergy = "done"
     end
@@ -52,3 +52,5 @@ while num_employees >0
     gets
   end
 end
+
+puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
