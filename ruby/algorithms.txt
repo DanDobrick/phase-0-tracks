@@ -1,0 +1,30 @@
+#Using an Elevator
+-Wait for user to tell the robot which floor to go to.
+-Enter elevator
+-Until you see the group of numbered buttons
+  -Turn clockwise 45 degrees
+  -Check for buttons
+-Move finger up along (hovering above) the buttons until the upper-most row is found
+-Move finger LEFT along the buttons until the left-most row is found.
+-Until the number of the button matches the number of the floor the user input
+  -For as many rows of buttons there are
+    -For as many columns of buttons there are in the elevator -1 
+      -Compare the number on the button to the desired floor
+      -If they don't match
+        -move finger 1.5 inches right
+      -else
+        -break
+      -Move finger (number_of_colums-1)*1.5 inches left
+      -Move finger 1.5 inches down
+-Depress button the elevator with your robot finger
+-Remove hand from button panel.
+-Until desired floor is reached
+  -Wait
+-Exit elevator
+
+#Changing staples in a stapler
+
+-Orient stapler so the hinge is facing you.
+-Orient stapler so the top is on top
+-Grab the top of the stapler in your dominant hand.
+-Grab the "foot" of the stapler
