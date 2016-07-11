@@ -22,9 +22,31 @@
   -Wait
 -Exit elevator
 
-#Changing staples in a stapler
+#Brushing My teeth
 
--Orient stapler so the hinge is facing you.
--Orient stapler so the top is on top
--Grab the top of the stapler in your dominant hand.
--Grab the "foot" of the stapler
+-Make sure toothbrush and toothpaste are on the counter
+  -If they are not put them on the counter.
+-Open toothpaste
+-Squeeze a pea-sized blob of toothpaste on the bristles of the toothbrush.
+-Turn the faucet on.
+-Place the bristles under the running water for .3 seconds.
+-Turn off faucet ##This step cannot be left out if living in California!
+-Open mouth
+-Insert toothbrush.
+-Place bristles against the outside of upper left molars.
+##Brushing Method
+-For 30 seconds
+  -move toothbrush in a circular motion against teeth
+  -Advance to the right along the teeth at regular intervals.
+  -If the brush reaches the right end of the row of teeth before 30 seconds is up, begin advancing left
+-Spit
+##
+-Place bristles against the outside of lower left molars
+##Brushing Method
+-Place bristles against the inside of upper left molars
+##Brushing Method
+-Place bristles against the inside of lower left molars
+##Brushing Method
+-Turn on faucet
+-Place toothbrush bristles under water flow for 3 seconds.
+-Rinse mouth out with water
