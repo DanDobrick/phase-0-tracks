@@ -4,6 +4,8 @@ check if each character is a space character
   If it is, leave it alone
   If it is not, move the letter to the next alphabetical/numerical character
 =end
+
+#Does a simple 1 letter Caesar Cypher on letters and numbers
 def encrypt(secret)
   index = 0
   while index < secret.length
@@ -31,6 +33,7 @@ loop through secret string
   replace the original letter with our new-found letter.
 =end
 
+#decrypts a 1 letter Caesar cypher using a-z only
 def decrypt(secret)
   index = 0
   alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -44,7 +47,7 @@ def decrypt(secret)
   return secret
 end
 
-
+#DRIVER CODE  
 puts "Would you like to encrypt or decrypt your password? (respond 'encrypt' or 'decrypt')"
 response = gets.chomp.downcase
 
