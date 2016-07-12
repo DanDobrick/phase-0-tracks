@@ -4,7 +4,6 @@ check if each character is a space character
   If it is, leave it alone
   If it is not, move the letter to the next alphabetical/numerical character
 =end
-
 def encrypt(secret)
   index = 0
   while index < secret.length
@@ -35,6 +34,7 @@ loop through secret string
 def decrypt(secret)
   index = 0
   alphabet = "abcdefghijklmnopqrstuvwxyz"
+  secret.downcase!
   while index < secret.length
     let_to_decrypt = secret[index]
     letter_location = alphabet.index(let_to_decrypt)
@@ -44,9 +44,24 @@ def decrypt(secret)
   return secret
 end
 
-puts encrypt("abc")
-puts encrypt("zed")
-puts decrypt("bcd")
-puts decrypt("afe")
 
-puts decrypt(encrypt("swordfish"))
+puts "Would you like to encrypt or decrypt your password? (respond 'encrypt' or 'decrypt')"
+response = gets.chomp.downcase
+
+puts "What is the word you would like to change?"
+word = gets.chomp
+
+if response == "encrypt"
+  encrypted_word = encrypt(word)
+  puts "Your encrypted message is #{encrypted_word}"
+elsif response == "decrypt"
+  decrypted_word = decrypt(word)
+  puts "Your decrypted message is #{decrypted_word}"
+end
+
+# puts encrypt("abc")
+# puts encrypt("zed")
+# puts decrypt("bcd")
+# puts decrypt("afe")
+
+# puts decrypt(encrypt("swordfish"))
