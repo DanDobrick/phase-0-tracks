@@ -1,0 +1,36 @@
+  body{
+    background-color:#ffffe0;
+  }
+  
+  header {
+    border-bottom: solid 2px black;
+    margin-bottom: 2%;
+  }
+  header h1 {
+    text-align: center;
+  }
+
+  .column-1{
+    display: inline-block;
+    vertical-align: text-top;
+    width: 40%;
+    background-color: #a9a9a9;
+    margin: 2%;
+    padding: 2%;
+    border: solid 2px #4682b4;
+  }
+
+  .column-2{
+   display: inline-block;
+   vertical-align: text-top;
+   width: 40%;
+   background-color: #a9a9a9;
+   margin: 2%;
+   padding: 2%;
+   border: solid 2px  #4682b4;
+ }
+
+ footer {
+   text-align: center;
+   font-size: .8em;
+ }
