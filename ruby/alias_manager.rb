@@ -17,13 +17,50 @@ name the results first_name and the last_name
 pass the first name through the letter movement method
 pass the last name through the letter movement method
 finally capitalize the first letter of both the first and last name
-add the two strings together
+add the two strings together, last name first
 
 print this name
 
-Swapping the first and last name.
-Changing all of the vowels (a, e, i, o, or u) to the next vowel in 'aeiou', and all of the consonants (
-everything else besides the vowels) to the next consonant in the alphabet. So 'a' would become 'e', 'u' 
-would become 'a', and 'd' would become 'f'.
-
 =end
+
+def letter_mover(letter)
+  vowels = 'aeiou'
+  consonants = 'bcdfghjklmnpqrstvwxyz'
+  if consonants.include?(letter)
+    index = consonants.index(letter)
+    new_leter = consonants[index+1]
+  else
+    index = vowels.index(letter)
+    new_letter = vowels[index + 1]
+  end
+end
+
+def spy_name(name)
+  name.downcase!
+  if !name.include?(' ')
+    return "ERROR - please enter first and last name separated by a space"
+  end
+  first_name, last_name = name.split(' ')
+  spy_first_name = ''
+  spy_last_name = ''
+  first_letters = first_name.split('')
+  last_letters = last_name.split('')
+
+  first_letters.each {|let| spy_last_name +=letter_mover(let)}
+  last_letters.each {|let| spy_first_name +=letter_mover(let)}
+
+  new_name = spy_first_name.capitalize + ' ' + spy_last_name.capitalize
+end
+
+#p spy_name("Felicia Torres")
+
+
+loop do
+  puts 'Who\'s identity do you wish to conceal?'
+  name = gets.chomp
+  if name == 'quit'
+    break
+  end
+  puts "Your new alias is #{spy_name(name)}"
+end
+
