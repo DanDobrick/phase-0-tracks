@@ -24,6 +24,9 @@ print this name
 =end
 
 def letter_mover(letter)
+  # Takes a letter, if it's a vowel, return the next vowel in alphabetical order
+  # if it's a consonant, return the next consonant in alphabetical order
+  letter.downcase!
   vowels = 'aeiou'
   consonants = 'bcdfghjklmnpqrstvwxyz'
   if consonants.include?(letter)
@@ -36,31 +39,38 @@ def letter_mover(letter)
 end
 
 def spy_name(name)
-  name.downcase!
+  #Take a name, swap first and last name and move each constant/vowel one consonant/vowel forward alphabetically
   if !name.include?(' ')
-    return "ERROR - please enter first and last name separated by a space"
+    #if only one name given--such as Prince--ask for a fake last name.
+    puts "Enter a fake last name to continue."
+    name += " "+gets.chomp
   end
   first_name, last_name = name.split(' ')
-  spy_first_name = ''
-  spy_last_name = ''
   first_letters = first_name.split('')
   last_letters = last_name.split('')
+  first_letters.map! {|let| letter_mover(let)}
+  last_letters.map! {|let| letter_mover(let)}
 
-  first_letters.each {|let| spy_last_name +=letter_mover(let)}
-  last_letters.each {|let| spy_first_name +=letter_mover(let)}
+  spy_first_name = last_letters.join('')
+  spy_last_name  = first_letters.join('')
 
   new_name = spy_first_name.capitalize + ' ' + spy_last_name.capitalize
 end
 
-#p spy_name("Felicia Torres")
 
-
+cover_list = {}
 loop do
-  puts 'Who\'s identity do you wish to conceal?'
+  #Keep asking user for names, then store them in a hash and print the master list at the end.
+  puts 'Who\'s identity do you wish to conceal? Type \'quit\' when finished.'
   name = gets.chomp
   if name == 'quit'
     break
+  else
+    spy_alias = spy_name(name)
+    cover_list[name] = spy_alias
   end
-  puts "Your new alias is #{spy_name(name)}"
 end
+
+cover_list.keys.each {|orig_name| puts "#{orig_name}\'s alias is #{cover_list[orig_name]}"}
+
 
