@@ -76,7 +76,7 @@ class Game
   # Checks if the game is over by winning or by number of turns
   def is_over?
     if @num_of_guesses == 0
-      did_win = false
+      @did_win = false
       true
     elsif @word_to_guess == ('_'*@word_to_guess.length)
       @did_win = true
