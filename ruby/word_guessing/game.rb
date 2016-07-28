@@ -34,9 +34,27 @@ steps:  remove all instances of the letter that was guessed from the string and 
         update the game state string
 output: nil
 
+Method: is_over?
+input: none
+steps: return true if the number of guesses left is 0 or if the player has guessed the word correctly
+      otherwise return false
+output: boolean
+
 Method: display
 input: none
 steps: print the string displaying the game state
 output: nil
   
 =end
+
+
+class Game
+  attr_reader :num_of_guesses, :word_to_guess, :game_board
+
+  def initialize(word)
+    @word_to_guess = word
+    @num_of_guesses = word.length
+    game_board_string = "_"*word.length
+    @game_board = game_board_string.split('')
+  end
+end
