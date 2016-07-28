@@ -29,8 +29,7 @@ describe Game do
   end
 
   it "Displays the game board to the player" do
-    expect(STDOUT).to receive(:puts).with('_ _ _ _ _ ')
-    game.display
+    expect(game.display).to eq '_ _ _ _ _ '
   end
 
   it "Tells you if the game is over" do
