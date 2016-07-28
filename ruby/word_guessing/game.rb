@@ -24,12 +24,6 @@ steps:  remove all instances of the letter that was guessed from the string and 
         update the game state string
 output: nil
 
-Method: is_over?
-input: none
-steps: return true if the number of guesses left is 0 or if the player has guessed the word correctly
-      otherwise return false
-output: boolean
-
 Method: display
 input: none
 steps: print the string displaying the game state
@@ -38,8 +32,9 @@ output: nil
 =end
 
 class Game
-  attr_reader :num_of_guesses # Used for rspec testing only :word_to_guess, :game_board
+  attr_reader :num_of_guesses, :did_win # Used for rspec testing only :word_to_guess, :game_board
 
+  # When initializing, create all the variables needed for later
   def initialize(word)
     @word_to_guess = word
     @num_of_guesses = word.length
@@ -47,44 +42,44 @@ class Game
     @game_board = @game_board_string.split('')
   end
 
+  # Update the state of the game board and the letters left to guess
   def update_game_state(index_of_letter)
     @game_board[index_of_letter] = @word_to_guess[index_of_letter]
     @word_to_guess[index_of_letter] = "_"
   end
 
-  #The following two methods (update_guess_count and check_guess) were lumped together at one point, 
-  #but I separated them so my methods would have one job
+  # The following two methods (update_guess_count and check_guess) were lumped together at one point, 
+  # but I separated them so my methods would have one job
+
+  # Updates the number of guesses left
   def update_guess_count(letter_guessed)
     unless @game_board.include?(letter_guessed)
       @num_of_guesses -=1
     end
   end
 
+  # Checks the guess to see if it's correct and updates the game appropriately
   def check_guess(letter_guessed)
     while @word_to_guess.include?(letter_guessed)
-        letter_index = @word_to_guess.index(letter_guessed)
-        update_game_state(letter_index)
-      end
+      letter_index = @word_to_guess.index(letter_guessed)
+      update_game_state(letter_index)
+    end
   end
 
+  # Displays the game board to the user
   def display
     @game_board_string = ''
     @game_board.each {|character| @game_board_string += character+" "}
     puts @game_board_string
   end
 
+  # Checks if the game is over by winning or by number of turns
   def is_over?
     if @num_of_guesses == 0
+      did_win = false
       true
     elsif @word_to_guess == ('_'*@word_to_guess.length)
-      true
-    else
-      false
-    end
-  end
-
-  def did_win?
-    if @word_to_guess == ('_'*@word_to_guess.length)
+      @did_win = true
       true
     else
       false
@@ -93,7 +88,7 @@ class Game
 end
 
 puts "Hello and welcome to a weird version of hangman!"
-puts "Player 1, please choose a word for player two to guess. Player 2, please turn your head."
+puts "Player 1, please choose a word for player two to guess (please do not use '_'). Player 2, please turn your head."
 
 word = gets.chomp
 game = Game.new(word)
@@ -110,15 +105,10 @@ while !game.is_over?
   game.check_guess(player_2)
 end
 
-if game.did_win?
+if game.did_win
   puts
   puts "Good job Player 2, you won!"
 else
   puts
-  puts "Try harder next time Player 2!"
+  puts "You lost! Try harder next time Player 2!"
 end
-
-
-
-
-
