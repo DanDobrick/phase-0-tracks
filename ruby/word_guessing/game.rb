@@ -47,7 +47,6 @@ output: nil
   
 =end
 
-
 class Game
   attr_reader :num_of_guesses, :word_to_guess, :game_board
 
