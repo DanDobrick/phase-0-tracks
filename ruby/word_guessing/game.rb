@@ -70,7 +70,7 @@ class Game
   def display
     @game_board_string = ''
     @game_board.each {|character| @game_board_string += character+" "}
-    puts @game_board_string
+    @game_board_string
   end
 
   # Checks if the game is over by winning or by number of turns
@@ -95,7 +95,7 @@ game = Game.new(word)
 
 while !game.is_over?
   puts "Player 2, you have #{game.num_of_guesses} guess left"
-  game.display
+  puts game.display
 
   puts "Player 2, make a guess"
 
