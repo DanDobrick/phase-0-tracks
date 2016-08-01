@@ -22,8 +22,8 @@ class VirusPredictor
 
   # calling predicted_deaths and speed_of_spread methods; return value is a string the same as speed_of_spread
   def virus_effects
-    predicted_deaths(@population_density, @population, @state)
-    speed_of_spread(@population_density, @state)
+    num_of_deaths = predicted_deaths(@population_density, @population, @state)
+    speed = speed_of_spread(@population_density, @state)
     print_end_state(num_of_deaths, speed)
   end
 
