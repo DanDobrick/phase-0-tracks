@@ -1,5 +1,4 @@
 /* Pseudo code
-
 input: Array of strings
 steps: begin with an empty string called longest
         for each string in the array
@@ -9,23 +8,20 @@ steps: begin with an empty string called longest
           otherwise, keep moving
         When we get to the end of the array return the string currently marked longest
 output: longest string
-
 */
 
 function find_longest(array){
   var longest = '';
   for (var i = 0; i < array.length; i++){
-     var current_string = array[i];
-     if (current_string.length > longest.length){
-       var longest = current_string;
-     }
-    }
-  return longest;
+   var current_string = array[i];
+   if (current_string.length > longest.length){
+     var longest = current_string;
+   }
+ }
+ return longest;
 }
 
-/*
-Pseudo Code
-
+/* Pseudo Code
 input: two key, value pairs
 steps: get all the keys from each hash
       for each key, check if they match any of the keys(using a method or a loop) from the other object
@@ -42,17 +38,16 @@ return: boolean
 */
 
 function key_value_match(hash_1, hash_2){
-  var hash_1_keys = Object.keys(hash_1);
   var hash_2_keys = Object.keys(hash_2);
-  for (var i = 0; i < hash_1_keys.length; i++){
-    var key_of_interest = hash_1_keys[i];
-    if(hash_2_keys.includes(key_of_interest)){
-      if(hash_1[key_of_interest] == hash_2[key_of_interest]){
+
+  for (var key in hash_1){
+    if (hash_2_keys.includes(key)){
+      if (hash_1[key] == hash_2[key]){
         return true;
       }
     }
   }
-  return false;
+  return false
 }
 
 /* Pseudo
@@ -83,24 +78,22 @@ function string_array(int){
 //Function tests
 // var long = find_longest(["long phrase","longest phrase","longer phrase"]);
 
-// console.log(long)
+// console.log(long == "longest phrase")
 
 // long = find_longest(["1234567890","123","1234565"]);
 
-// console.log(long)
+// console.log(long == 1234567890)
 
-// long = find_longest(["12345","12345","8675309", "8675308"]);
-
-// console.log(long)
 
 // var my_hash1 = {name: "Tamir", age: 52};
 // var my_hash2 = {name: "Steven", age: 52};
 
-// console.log(key_value_match(my_hash1, my_hash2));
+// console.log(key_value_match(my_hash1, my_hash2) == true);
 
 // my_hash1 = {name: "Tamir", hair_color: 'green'};
 // my_hash2 = {name: "Steven", favorite_color: 'green'};
 
-// console.log(key_value_match(my_hash1, my_hash2));
+// console.log(key_value_match(my_hash1, my_hash2) == false);
 
 string_array(2);
+
