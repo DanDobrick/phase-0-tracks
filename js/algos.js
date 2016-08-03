@@ -54,7 +54,7 @@ function key_value_match(hash_1, hash_2){
 input: integer
 steps: create string of possible characters
        create an empty array
-       for each integer in the range from 0 to input-1
+       for each integer in the range from 0 to input
         choose a number between 1 and 10
           for each integer from 0 to the number chosen
             create an empty string
@@ -63,16 +63,26 @@ steps: create string of possible characters
       Every time we do this, add it to our array
 
 output: Array
+
+This is NOT a single responsibility method and I'm sure it could be cleaned up.
 */
 
 function string_array(int){
   var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var random_strings = [];
-  for (var i = 0; i < int-1; i++){
-    rand_num = Math.random() * 10;
-    rand_num = Math.floor(rand_num);
-    console.log(rand_num);
+  for (var i = int; i > 0; i--){
+    var string_length = Math.random() * 10;
+    string_length = Math.ceil(string_length);
+    var new_string = ''
+    for (var j = 0; j < string_length; j ++){
+      var random_number = Math.random() * 51;
+      random_number = Math.ceil(random_number);
+      var new_character = alphabet[random_number];
+      new_string += new_character;
+    }
+    random_strings.push(new_string)
   }
+  console.log(random_strings)
 }
 
 //Function tests
@@ -95,5 +105,5 @@ function string_array(int){
 
 // console.log(key_value_match(my_hash1, my_hash2) == false);
 
-string_array(2);
+string_array(5);
 
