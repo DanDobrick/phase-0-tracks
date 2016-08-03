@@ -55,25 +55,52 @@ function key_value_match(hash_1, hash_2){
   return false;
 }
 
+/* Pseudo
+input: integer
+steps: create string of possible characters
+       create an empty array
+       for each integer in the range from 0 to input-1
+        choose a number between 1 and 10
+          for each integer from 0 to the number chosen
+            create an empty string
+            choose a random number between 0 and 51(the length of my alphabet string)
+            add that letter to our empty string
+      Every time we do this, add it to our array
+
+output: Array
+*/
+
+function string_array(int){
+  var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var random_strings = [];
+  for (var i = 0; i < int-1; i++){
+    rand_num = Math.random() * 10;
+    rand_num = Math.floor(rand_num);
+    console.log(rand_num);
+  }
+}
+
 //Function tests
-var long = find_longest(["long phrase","longest phrase","longer phrase"]);
+// var long = find_longest(["long phrase","longest phrase","longer phrase"]);
 
-console.log(long)
+// console.log(long)
 
-long = find_longest(["1234567890","123","1234565"]);
+// long = find_longest(["1234567890","123","1234565"]);
 
-console.log(long)
+// console.log(long)
 
-long = find_longest(["12345","12345","8675309", "8675308"]);
+// long = find_longest(["12345","12345","8675309", "8675308"]);
 
-console.log(long)
+// console.log(long)
 
-var my_hash1 = {name: "Tamir", age: 52};
-var my_hash2 = {name: "Steven", age: 52};
+// var my_hash1 = {name: "Tamir", age: 52};
+// var my_hash2 = {name: "Steven", age: 52};
 
-console.log(key_value_match(my_hash1, my_hash2));
+// console.log(key_value_match(my_hash1, my_hash2));
 
-my_hash1 = {name: "Tamir", hair_color: 'green'};
-my_hash2 = {name: "Steven", favorite_color: 'green'};
+// my_hash1 = {name: "Tamir", hair_color: 'green'};
+// my_hash2 = {name: "Steven", favorite_color: 'green'};
 
-console.log(key_value_match(my_hash1, my_hash2));
+// console.log(key_value_match(my_hash1, my_hash2));
+
+string_array(2);
