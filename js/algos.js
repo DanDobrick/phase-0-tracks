@@ -93,24 +93,29 @@ function random_integer(max_num){
 }
 
 //Function tests
-// var long = find_longest(["long phrase","longest phrase","longer phrase"]);
+var long = find_longest(["long phrase","longest phrase","longer phrase"]);
 
-// console.log(long == "longest phrase")
+console.log(long == "longest phrase")
 
-// long = find_longest(["1234567890","123","1234565"]);
+long = find_longest(["1234567890","123","1234565"]);
 
-// console.log(long == 1234567890)
+console.log(long == 1234567890)
 
 
-// var my_hash1 = {name: "Tamir", age: 52};
-// var my_hash2 = {name: "Steven", age: 52};
+var my_hash1 = {name: "Tamir", age: 52};
+var my_hash2 = {name: "Steven", age: 52};
 
-// console.log(key_value_match(my_hash1, my_hash2) == true);
+console.log(key_value_match(my_hash1, my_hash2) == true);
 
-// my_hash1 = {name: "Tamir", hair_color: 'green'};
-// my_hash2 = {name: "Steven", favorite_color: 'green'};
+my_hash1 = {name: "Tamir", hair_color: 'green'};
+my_hash2 = {name: "Steven", favorite_color: 'green'};
 
-// console.log(key_value_match(my_hash1, my_hash2) == false);
+console.log(key_value_match(my_hash1, my_hash2) == false);
 
-// console.log(string_array(5));
+for (var i = 0; i < 10; i++){
+  var array = string_array(5);
+  console.log(array);
+  var longest_word = find_longest(array);
+  console.log(longest_word)
+}
 
