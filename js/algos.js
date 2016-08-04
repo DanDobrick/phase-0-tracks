@@ -1,5 +1,4 @@
 /* Pseudo code
-
 input: Array of strings
 steps: begin with an empty string called longest
         for each string in the array
@@ -9,23 +8,20 @@ steps: begin with an empty string called longest
           otherwise, keep moving
         When we get to the end of the array return the string currently marked longest
 output: longest string
-
 */
 
 function find_longest(array){
   var longest = '';
   for (var i = 0; i < array.length; i++){
-     var current_string = array[i];
-     if (current_string.length > longest.length){
-       var longest = current_string;
-     }
-    }
-  return longest;
+   var current_string = array[i];
+   if (current_string.length > longest.length){
+     var longest = current_string;
+   }
+ }
+ return longest;
 }
 
-/*
-Pseudo Code
-
+/* Pseudo Code
 input: two key, value pairs
 steps: get all the keys from each hash
       for each key, check if they match any of the keys(using a method or a loop) from the other object
@@ -42,24 +38,23 @@ return: boolean
 */
 
 function key_value_match(hash_1, hash_2){
-  var hash_1_keys = Object.keys(hash_1);
   var hash_2_keys = Object.keys(hash_2);
-  for (var i = 0; i < hash_1_keys.length; i++){
-    var key_of_interest = hash_1_keys[i];
-    if(hash_2_keys.includes(key_of_interest)){
-      if(hash_1[key_of_interest] == hash_2[key_of_interest]){
+
+  for (var key in hash_1){
+    if (hash_2_keys.includes(key)){
+      if (hash_1[key] == hash_2[key]){
         return true;
       }
     }
   }
-  return false;
+  return false
 }
 
 /* Pseudo
 input: integer
 steps: create string of possible characters
        create an empty array
-       for each integer in the range from 0 to input-1
+       for each integer in the range from 0 to input
         choose a number between 1 and 10
           for each integer from 0 to the number chosen
             create an empty string
@@ -70,37 +65,57 @@ steps: create string of possible characters
 output: Array
 */
 
-function string_array(int){
+function string_array(array_length){
   var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var random_strings = [];
-  for (var i = 0; i < int-1; i++){
-    rand_num = Math.random() * 10;
-    rand_num = Math.floor(rand_num);
-    console.log(rand_num);
+  for (var i = array_length; i > 0; i--){
+    var new_string = ''
+
+    var string_length = random_integer(10);
+    for (var j = 0; j < string_length; j ++){
+      var alphabet_index = alphabet.length
+      var random_number = random_integer(alphabet_index);
+      // The -1 below allows us to have an index of 0 (since we are using the ceiling function in random_integer) and compensates for index starting at 0
+      var new_character = alphabet[random_number - 1];
+      new_string += new_character;
+    }
+    random_strings.push(new_string)
   }
+  return random_strings
+}
+
+//Adding function to remove repetition and to make string_array single responsibility
+
+function random_integer(max_num){
+  var random_number = Math.random() * max_num;
+  random_number = Math.ceil(random_number);
+  return random_number
 }
 
 //Function tests
-// var long = find_longest(["long phrase","longest phrase","longer phrase"]);
+var long = find_longest(["long phrase","longest phrase","longer phrase"]);
 
-// console.log(long)
+console.log(long == "longest phrase")
 
-// long = find_longest(["1234567890","123","1234565"]);
+long = find_longest(["1234567890","123","1234565"]);
 
-// console.log(long)
+console.log(long == 1234567890)
 
-// long = find_longest(["12345","12345","8675309", "8675308"]);
 
-// console.log(long)
+var my_hash1 = {name: "Tamir", age: 52};
+var my_hash2 = {name: "Steven", age: 52};
 
-// var my_hash1 = {name: "Tamir", age: 52};
-// var my_hash2 = {name: "Steven", age: 52};
+console.log(key_value_match(my_hash1, my_hash2) == true);
 
-// console.log(key_value_match(my_hash1, my_hash2));
+my_hash1 = {name: "Tamir", hair_color: 'green'};
+my_hash2 = {name: "Steven", favorite_color: 'green'};
 
-// my_hash1 = {name: "Tamir", hair_color: 'green'};
-// my_hash2 = {name: "Steven", favorite_color: 'green'};
+console.log(key_value_match(my_hash1, my_hash2) == false);
 
-// console.log(key_value_match(my_hash1, my_hash2));
+for (var i = 0; i < 10; i++){
+  var array = string_array(5);
+  console.log(array);
+  var longest_word = find_longest(array);
+  console.log(longest_word)
+}
 
-string_array(2);
