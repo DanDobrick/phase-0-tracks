@@ -63,26 +63,33 @@ steps: create string of possible characters
       Every time we do this, add it to our array
 
 output: Array
-
-This is NOT a single responsibility method and I'm sure it could be cleaned up.
 */
 
-function string_array(int){
+function string_array(array_length){
   var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var random_strings = [];
-  for (var i = int; i > 0; i--){
-    var string_length = Math.random() * 10;
-    string_length = Math.ceil(string_length);
+  for (var i = array_length; i > 0; i--){
     var new_string = ''
+
+    var string_length = random_integer(10);
     for (var j = 0; j < string_length; j ++){
-      var random_number = Math.random() * 51;
-      random_number = Math.ceil(random_number);
-      var new_character = alphabet[random_number];
+      var alphabet_index = alphabet.length
+      var random_number = random_integer(alphabet_index);
+      // The -1 below allows us to have an index of 0 (since we are using the ceiling function in random_integer) and compensates for index starting at 0
+      var new_character = alphabet[random_number - 1];
       new_string += new_character;
     }
     random_strings.push(new_string)
   }
-  console.log(random_strings)
+  return random_strings
+}
+
+//Adding function to remove repetition and to make string_array single responsibility
+
+function random_integer(max_num){
+  var random_number = Math.random() * max_num;
+  random_number = Math.ceil(random_number);
+  return random_number
 }
 
 //Function tests
@@ -105,5 +112,5 @@ function string_array(int){
 
 // console.log(key_value_match(my_hash1, my_hash2) == false);
 
-string_array(5);
+// console.log(string_array(5));
 
