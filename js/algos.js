@@ -47,7 +47,7 @@ function key_value_match(hash_1, hash_2){
       }
     }
   }
-  return false
+  return false;
 }
 
 /* Pseudo
@@ -69,19 +69,18 @@ function string_array(array_length){
   var alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var random_strings = [];
   for (var i = array_length; i > 0; i--){
-    var new_string = ''
+    var new_string = '';
 
     var string_length = random_integer(10);
     for (var j = 0; j < string_length; j ++){
-      var alphabet_index = alphabet.length
-      var random_number = random_integer(alphabet_index);
+      var random_number = random_integer(alphabet.length);
       // The -1 below allows us to have an index of 0 (since we are using the ceiling function in random_integer) and compensates for index starting at 0
       var new_character = alphabet[random_number - 1];
       new_string += new_character;
     }
     random_strings.push(new_string)
   }
-  return random_strings
+  return random_strings;
 }
 
 //Adding function to remove repetition and to make string_array single responsibility
@@ -89,28 +88,28 @@ function string_array(array_length){
 function random_integer(max_num){
   var random_number = Math.random() * max_num;
   random_number = Math.ceil(random_number);
-  return random_number
+  return random_number;
 }
 
 //Function tests
-var long = find_longest(["long phrase","longest phrase","longer phrase"]);
+// var long = find_longest(["long phrase","longest phrase","longer phrase"]);
 
-console.log(long == "longest phrase")
+// console.log(long == "longest phrase")
 
-long = find_longest(["1234567890","123","1234565"]);
+// long = find_longest(["1234567890","123","1234565"]);
 
-console.log(long == 1234567890)
+// console.log(long == 1234567890)
 
 
-var my_hash1 = {name: "Tamir", age: 52};
-var my_hash2 = {name: "Steven", age: 52};
+// var my_hash1 = {name: "Tamir", age: 52};
+// var my_hash2 = {name: "Steven", age: 52};
 
-console.log(key_value_match(my_hash1, my_hash2) == true);
+// console.log(key_value_match(my_hash1, my_hash2) == true);
 
-my_hash1 = {name: "Tamir", hair_color: 'green'};
-my_hash2 = {name: "Steven", favorite_color: 'green'};
+// my_hash1 = {name: "Tamir", hair_color: 'green'};
+// my_hash2 = {name: "Steven", favorite_color: 'green'};
 
-console.log(key_value_match(my_hash1, my_hash2) == false);
+// console.log(key_value_match(my_hash1, my_hash2) == false);
 
 for (var i = 0; i < 10; i++){
   var array = string_array(5);
