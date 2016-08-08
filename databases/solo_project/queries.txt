@@ -1,0 +1,63 @@
+Query:
+SELECT * FROM players;
+Output:
+1|Dan|1|2
+2|Gregory|3|4
+
+Query:
+UPDATE players SET name = 'Dan D' WHERE name = 'Dan';
+
+Query:
+SELECT * from players, cards;
+Output:
+1|Dan D|1|2|1|Ace of Spades|false
+1|Dan D|1|2|2|King of Spades|false
+1|Dan D|1|2|3|Queen of Spades|false
+1|Dan D|1|2|4|Jack of Spades|false
+1|Dan D|1|2|5|K of Hearts|true
+1|Dan D|1|2|6|5 of Hearts|true
+2|Gregory|3|4|1|Ace of Spades|false
+2|Gregory|3|4|2|King of Spades|false
+2|Gregory|3|4|3|Queen of Spades|false
+2|Gregory|3|4|4|Jack of Spades|false
+2|Gregory|3|4|5|K of Hearts|true
+2|Gregory|3|4|6|5 of Hearts|true
+
+Query:
+SELECT players.name, cards.name FROM players JOIN cards ON players.card_1_id = cards.id;
+Output:
+Dan D|Ace of Spades
+Gregory|Queen of Spades
+
+Query:
+DELETE FROM cards WHERE in_deck = 'true';
+
+Query:
+SELECT players.name, card1.name, card2.name
+FROM players
+JOIN cards card1 ON players.card_1_id = card1.id
+JOIN cards card2 ON players.card_2_id = card2.id;
+Output:
+Dan D|Ace of Spades|King of Spades
+Gregory|Queen of Spades|Jack of Spades
+
+Query:
+SELECT players.name, cards.in_deck, cards.name
+FROM cards
+Left JOIN players
+on players.card_1_id = cards.id;
+Output:
+Dan D|false|Ace of Spades
+|false|King of Spades
+Gregory|false|Queen of Spades
+|false|Jack of Spades
+|true|K of Hearts
+|true|5 of Hearts
+
+Query:
+SELECT players.name, cards.name
+FROM players
+INNER JOIN cards  ON players.card_2_id = cards.id;
+Output:
+Dan D|King of Spades
+Gregory|Jack of Spades
