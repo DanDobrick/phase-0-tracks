@@ -29,7 +29,19 @@ def print_game_short(array_to_print)
     puts "Name: " + game_name
     puts 
   end
+end
 
+def print_game_long(game_hash)
+  #takes a single game hash and prints information in human readable format
+  name = game_hash['name']
+  player_min = game_hash['player_min']
+  player_max = game_hash['player_max']
+  owners = game_hash['owner_name']
+
+  puts "        Name: #{name}
+        Minimum players: #{player_min}
+        Maximum players: #{player_max}
+        Owner(s): #{owners}"
 end
 
 def get_more_info(db, game_id)
@@ -38,7 +50,7 @@ def get_more_info(db, game_id)
     FROM games
     JOIN owners ON games.owner_id = owners.id
     WHERE games.id = ?", [game_id])
-  verbose_game_info = remove_extra_info(game_info)
+  verbose_game_info = remove_extra_info(game_info)[0]
 end
 
 def match_player_count(db, player_number)
@@ -72,19 +84,12 @@ def enter_new_game(db, game_name, player_min, player_max, owner_name)
 end
 
 def choose_random_game(db)
+  #takes database and returns random id
   #getting number of games in the table 'games'
   num_of_games = db.execute("SELECT COUNT(id) FROM games")
   #converting SQL result from a hash inside an array to integer
   num_of_games = num_of_games[0][0]
   random_number = rand(num_of_games) + 1
-
-  # Select game based on id and prints certain information
-  random_game = db.execute( "SELECT games.name, games.player_min, games.player_max, owners.owner_name
-    FROM games
-    JOIN owners ON games.owner_id = owners.id
-    WHERE games.id = ?", [random_number]
-    )
-  random_game = remove_extra_info(random_game)
 end
 
 def random_game_playercount(db, player_count)
@@ -93,6 +98,8 @@ def random_game_playercount(db, player_count)
   random_number = rand(possible_games.length) + 1
   random_game = possible_games[random_number]
 end
+
+p   get_more_info(db, 5)
 
 #USER INTERFACE
 continue = true
@@ -119,9 +126,36 @@ while continue
 
   case selection
   when "1"
-    puts "1. Add a game to the collection."
+    puts "ADD GAME TO COLLECTION"
+    puts "What is the name of the game?"
+    name = gets.chomp
+    puts "What is the MINIMUM player count?"
+    player_min = gets.chomp
+    puts "What is the MAXIMUM player count?"
+    player_max = gets.chomp
+    puts "Who owns the game? (If multiple people own the game, separate their names with a pipe like so: 'Dan | Dave'"
+    owner_name = gets.chomp
+    puts "Is the following information correct(y/n)?
+          Game Name: #{name}
+          Minimum players: #{player_min}
+          Maximum players: #{player_max}
+          Owner(s): #{owner_name}"
+    correct = gets.chomp
+    if correct = 'y'
+      enter_new_game(db, name, player_min.to_i, player_max.to_i, owner_name)
+      puts "Successfully added game to database"
+    else
+      puts 'Something went wrong!'
+    end
+    puts "Press enter to return to main menu"
+    gets
   when "2"
-    puts "2. Choose a random game."
+    puts "CHOOSE A RANDOM GAME"
+    game_id = choose_random_game(db)
+    game_info = get_more_info(db, game_id)
+    print_game_long(game_info)
+    puts "Press enter to return to main menu"
+    gets
   when "3"
     puts "3. Choose a random game based on the number of players."
   when "4"
