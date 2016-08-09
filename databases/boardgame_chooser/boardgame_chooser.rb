@@ -91,3 +91,20 @@ def random_game_playercount(db, player_count)
   random_game = possible_games[random_number]
 end
 
+puts "Welcome to Game Organizer 5,000!"
+puts "Select a number from the options below"
+puts '      1. Add a game to the collection
+      2. Choose a random game
+      3. Choose a random game based on the number of players
+      4. Display games that support a particular player count
+      5. Find information on a certain game(NOT YET IMPLEMENTED).'
+selection = gets.chomp
+until selection.to_i>0 && selection.to_i<6
+  puts "I'm sorry \"#{selection}\" is not a valid choice, please select from the following options:
+      1. Add a game to the collection
+      2. Choose a random game
+      3. Choose a random game based on the number of players
+      4. Display games that support a particular player count
+      5. Find information on a certain game(NOT YET IMPLEMENTED)."
+  selection = gets.chomp
+end
