@@ -1,12 +1,14 @@
-#require gems
+# require gems
 require 'sqlite3'
 
-#open database
+# open database and have DB return results as hashes in arrays
 db = SQLite3::Database.new("boardgames.db")
 db.results_as_hash = true
 
 def remove_extra_info(orig_array)
-  #removes extra information from each game hash passed in as an array of hashes, returns a cleaned array
+  # Array enters formatted like so: [game, game, game] where each game is
+  # a hash {key => val1, key => val2, key => val3, 0 => val1, 1=> val2, 2 => val3}
+  # this method removes the key value pairs which contain numbers as keys (since they are redundant)
   games_array = []
   orig_array.each do |game|
     orig_array ={}
@@ -20,8 +22,8 @@ def remove_extra_info(orig_array)
   games_array
 end
 
-def print_game_short(array_to_print)
-  #prints game name and id when passed an array of hashes
+def print_games_short(array_to_print)
+  #prints each game name and id when passed an array of hashes
   array_to_print.each do |game|
     game_name = game['name']
     game_id = game['id']
@@ -45,7 +47,7 @@ def print_game_long(game_hash)
 end
 
 def get_more_info(db, game_id)
-  #returns verbose information as an array from the database when passed a db and game id
+  #returns verbose information as a hash from the database when passed a db and a single game id
   game_info = db.execute("SELECT games.name, games.id, games.player_min, games.player_max, owners.owner_name
     FROM games
     JOIN owners ON games.owner_id = owners.id
@@ -76,8 +78,10 @@ def owner_name_to_id(owner_name)
 end
 
 def enter_new_game(db, game_name, player_min, player_max, owner_name)
-  #enters a new game into the database
+  #enters a new game into the database when given strings specifying information
   owner_id = owner_name_to_id(owner_name)
+  player_max = player_max.to_i
+  player_min = player_min.to_i
   db.execute("INSERT INTO games (name, player_min, player_max, owner_id)
     VALUES (?, ?, ?, ?)", [game_name, player_min, player_max, owner_id]
     )
@@ -125,6 +129,7 @@ while continue
     selection = gets.chomp
   end
   system "clear" or system "cls"
+
   case selection
   when "1"
     puts "ADD GAME TO COLLECTION"
@@ -143,7 +148,7 @@ while continue
           Owner(s): #{owner_name}"
     correct = gets.chomp
     if correct == 'y'
-      enter_new_game(db, name, player_min.to_i, player_max.to_i, owner_name)
+      enter_new_game(db, name, player_min, player_max, owner_name)
       system "clear" or system "cls"
       puts "Successfully added game to database"
     else
@@ -152,6 +157,7 @@ while continue
     puts "Press enter to return to main menu"
     gets
     system "clear" or system "cls"
+
   when "2"
     puts "CHOOSE A RANDOM GAME"
     game_id = choose_random_game(db)
@@ -160,21 +166,62 @@ while continue
     puts "Press enter to return to main menu"
     gets
     system "clear" or system "cls"
+
   when "3"
     puts "CHOOSE A RANDOM GAME BASED ON NUMBER OF PLAYERS"
+    puts "Please type in a player count from 1 to 12"
+    player_count = gets.chomp.to_i
+    if player_count == 0
+      system "clear" or system "cls"
+      puts "No games available for player count of #{player_count}"
+    end
+    random_game = random_game_playercount(db, player_count)
+    print_game_long(random_game)
     puts "Press enter to return to main menu"
     gets
     system "clear" or system "cls"
+
   when "4"
-    puts "4. Display games that support a particular player count."
-    puts "Press enter to return to main menu"
-    gets
+    puts "ALL GAMES THAT SUPPORT A PARTICULAR PLAYER COUNT"
+    puts "Please type in a player count from 1 to 12"
+    player_count = gets.chomp.to_i
+    if player_count == 0
+      system "clear" or system "cls"
+      puts "ALL GAMES THAT SUPPORT A PARTICULAR PLAYER COUNT"
+      puts "No games available for player count of #{player_count}"
+    end
     system "clear" or system "cls"
+    puts "ALL GAMES THAT SUPPORT A PARTICULAR PLAYER COUNT"
+    matching_games = match_player_count(db, player_count)
+    puts "Found #{matching_games.length} games that support #{player_count} players. Press enter for a list."
+    gets
+
+    continue = true
+    until continue == false
+      print_games_short(matching_games)
+      puts "Please type a game id to obtain more information about that game or type 'done' to return to the main menu.(scroll up for more games)"
+      selected_game = gets.chomp.to_i
+      if selected_game == 0
+        break
+      end
+      system "clear" or system "cls"
+      puts 
+      more_game_info = get_more_info(db, selected_game)
+      print_game_long(more_game_info)
+      puts
+      puts "Press enter to return to game list"
+      gets
+      system "clear" or system "cls"
+    end
+    system "clear" or system "cls"
+
+
   when "5"
     puts "5. Find information on a certain game(NOT YET IMPLEMENTED)."
     puts "Press enter to return to main menu"
     gets
     system "clear" or system "cls"
+
   when "6"
     puts "Thank you for using Game Organizer 5000."
     continue = false
