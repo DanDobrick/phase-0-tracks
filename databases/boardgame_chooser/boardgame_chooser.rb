@@ -99,11 +99,11 @@ def random_game_playercount(db, player_count)
   random_game = possible_games[random_number]
 end
 
-p   get_more_info(db, 5)
-
 #USER INTERFACE
 continue = true
+system "clear" or system "cls"
 puts "Welcome to Game Organizer 5,000!"
+puts
 while continue
   puts "Select a number from the options below"
   puts '      1. Add a game to the collection.
@@ -114,6 +114,7 @@ while continue
       6. Quit program'
   selection = gets.chomp
   until selection.to_i>0 && selection.to_i<7
+    system "clear" or system "cls"
     puts "I'm sorry \"#{selection}\" is not a valid choice, please select from the following options:
       1. Add a game to the collection.
       2. Choose a random game.
@@ -123,7 +124,7 @@ while continue
       6. Quit program"
     selection = gets.chomp
   end
-
+  system "clear" or system "cls"
   case selection
   when "1"
     puts "ADD GAME TO COLLECTION"
@@ -141,14 +142,16 @@ while continue
           Maximum players: #{player_max}
           Owner(s): #{owner_name}"
     correct = gets.chomp
-    if correct = 'y'
+    if correct == 'y'
       enter_new_game(db, name, player_min.to_i, player_max.to_i, owner_name)
+      system "clear" or system "cls"
       puts "Successfully added game to database"
     else
       puts 'Something went wrong!'
     end
     puts "Press enter to return to main menu"
     gets
+    system "clear" or system "cls"
   when "2"
     puts "CHOOSE A RANDOM GAME"
     game_id = choose_random_game(db)
@@ -156,12 +159,22 @@ while continue
     print_game_long(game_info)
     puts "Press enter to return to main menu"
     gets
+    system "clear" or system "cls"
   when "3"
-    puts "3. Choose a random game based on the number of players."
+    puts "CHOOSE A RANDOM GAME BASED ON NUMBER OF PLAYERS"
+    puts "Press enter to return to main menu"
+    gets
+    system "clear" or system "cls"
   when "4"
     puts "4. Display games that support a particular player count."
+    puts "Press enter to return to main menu"
+    gets
+    system "clear" or system "cls"
   when "5"
     puts "5. Find information on a certain game(NOT YET IMPLEMENTED)."
+    puts "Press enter to return to main menu"
+    gets
+    system "clear" or system "cls"
   when "6"
     puts "Thank you for using Game Organizer 5000."
     continue = false
