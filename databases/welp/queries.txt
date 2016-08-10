@@ -1,0 +1,43 @@
+Query:
+SELECT *
+FROM users
+JOIN reviews ON users.id = reviews.user_id
+JOIN businesses ON businesses.id = reviews.business_id;
+
+OUTPUT:
+1|Bradford|Pitt|1|5|GREAT FOOD!|6|1|6|Sushi World
+7|Denzel|George|2|4|Strong drinks; weird smell.|3|7|3|The Beagle Nightclub
+3|Angela|Jolie|3|1|Towed my car by mistake, then charged me for storage!|2|3|2|Amir's Towing
+
+
+Query:
+SELECT businesses.name, users.first_name, users.last_name, reviews.stars, reviews.comment
+FROM users
+JOIN reviews ON users.id = reviews.user_id
+JOIN businesses ON businesses.id = reviews.business_id;
+
+OUTPUT:
+Sushi World|Bradford|Pitt|5|GREAT FOOD!
+The Beagle Nightclub|Denzel|George|4|Strong drinks; weird smell.
+Amir's Towing|Angela|Jolie|1|Towed my car by mistake, then charged me for storage!
+
+
+Query:
+SELECT *
+FROM reviews
+JOIN businesses ON reviews.business_id = businesses.id
+JOIN users ON reviews.user_id = users.id
+WHERE businesses.id = 3;
+
+OUTPUT:
+2|4|Strong drinks; weird smell.|3|7|3|The Beagle Nightclub|7|Denzel|George
+
+One more for fun
+SELECT businesses.name, users.first_name, users.last_name, reviews.stars, reviews.comment
+FROM users
+JOIN reviews ON users.id = reviews.user_id
+JOIN businesses ON businesses.id = reviews.business_id
+WHERE businesses.id = 3
+
+OUTPUT:
+The Beagle Nightclub|Denzel|George|4|Strong drinks; weird smell.
