@@ -103,6 +103,13 @@ def random_game_playercount(db, player_count)
   random_game = possible_games[random_number]
 end
 
+def find_game(db, name)
+  game_hash = db.execute('SELECT games.id
+    FROM games
+    WHERE name = ?', [name])
+  game_hash = remove_extra_info(game_hash)
+end
+
 #USER INTERFACE
 continue = true
 system "clear" or system "cls"
@@ -217,7 +224,19 @@ while continue
 
 
   when "5"
-    puts "5. Find information on a certain game(NOT YET IMPLEMENTED)."
+    puts "FIND INFORMATION FOR A GAME"
+    puts "What is the name of the game you are looking for?"
+    game_to_find = gets.chomp
+    system "clear" or system "cls"
+    game_id = find_game(db, game_to_find)[0]
+    if game_id == nil
+      puts "Game not found, please try again"
+    else
+      puts "FIND INFORMATION FOR A GAME"
+      long_game_info = get_more_info(db, game_id['id'])
+      print_game_long(long_game_info)
+      puts
+    end
     puts "Press enter to return to main menu"
     gets
     system "clear" or system "cls"
