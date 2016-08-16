@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery: Something Clever</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+  <h2>Quick Information (Taken from DBC 9.3 Module)</h1>
+    <p>
+      jQuery is a JavaScript library (an existing JavaScript file of functions that you can call in your projects, in other words) that helps you do the following with fewer lines of code (which are often more readable):
+      <ul id ='jQuery-benefits'>
+        <li>Add event listeners for clicking, hovering, and other user actions</li>
+        <li>Add or remove CSS classes in response to events</li>
+        <li>Make elements fade in or out, slide up or down, or otherwise transition from visible to invisible</li>
+        <li>Grab values from forms</li>
+        <li>... and lots more! </li>
+      </ul>
+    </p>
+
+    <h2>Basic Structure</h2>
+    <p>
+      Basic Syntax:
+      Basic syntax is: <strong>$(selector).action()</strong><br>
+      Where 'Selector' is a CSS selector: <span class='highlight'>Add list of selectors and descriptions here</span><br>
+      And 'action' is a jQuery action; a list of example actions are below:
+      <ul id = 'jQuery-actions'>
+        <li>css</li>
+        <li>animate (element needs to have a non-static position such as relative)</li>
+      </ul>
+    </p>
+
+    <h2>Examples:</h2>
+    <p><div id="blue-example">Example: This text is in a div with id blue-example that has jQuery code:
+      $("#blue-example").css('color', 'blue')</div><br>
+
+      <button id="hides">This button</button> Hides itself!
+    </p>
+    <p>This button will make each list item do something awesome!
+    </p>
+    <button type= 'button' id='list'>collapse lists</button>
+    <p>
+      <button id ='alert'>This button creates an alert</button>
+    </p>
+
+
+    <script src="script.js"></script>
+  </body>
+  </html>
