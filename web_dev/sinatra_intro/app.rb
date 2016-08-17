@@ -26,7 +26,12 @@ end
 # write a GET route that retrieves
 # all student data
 get '/students' do
-  students = db.execute("SELECT * FROM students")
+  campus = params[:campus]
+  if campus
+    students = db.execute("SELECT * FROM students WHERE campus = ?", [campus])
+  else
+    students = db.execute("SELECT * FROM students")
+  end
   response = ""
   students.each do |student|
     response << "ID: #{student['id']}<br>"
@@ -44,3 +49,25 @@ get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
 end
+
+get '/contact' do
+  '<h2>123 Sesame Street</h2>'
+end
+
+get '/great_job' do 
+  name = params[:name]
+  if name
+    "Good Job #{name}!"
+  else
+    "Good Job!"
+  end
+end
+
+get '/:num1/plus/:num2' do
+  num1 = params[:num1].to_i
+  num2 = params[:num2].to_i
+  added_nums = num2 + num1
+  added_nums.to_s
+end
+
+## My Optional bonus work is in the students page
